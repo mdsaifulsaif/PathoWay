@@ -23,7 +23,7 @@ function ClientsSection() {
   return (
     <section className=" py-8 px-4">
       <div className="max-w-6xl mx-auto text-center border  p-6 rounded">
-        <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+        <h3 className="text-2xl  font-bold text-[#023737] mb-6">
           We&apos;ve helped thousands of sales teams
         </h3>
         <Marquee pauseOnHover speed={50} gradient={false}>
