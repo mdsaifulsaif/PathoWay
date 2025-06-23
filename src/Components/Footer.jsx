@@ -14,9 +14,9 @@ function Footer() {
           </a>
         </div>
         <p className="font-bold">
-          ACME Industries Ltd.
+          PathoWay
           <br />
-          Providing reliable tech since 1992
+          Providing Dowra Dowri since 1992
         </p>
         <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
       </aside>
