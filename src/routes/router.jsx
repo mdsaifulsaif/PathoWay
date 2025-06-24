@@ -5,6 +5,8 @@ import AuthLayout from "../layout/Auth/AuthLayout";
 import Login from "../layout/Auth/Login";
 import Register from "../layout/Auth/Register";
 import Coverage from "../pages/Coverage";
+import AddParcelForm from "../pages/AddParcelForm";
+import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,15 @@ export const router = createBrowserRouter([
       {
         path: "/coverage",
         Component: Coverage,
+      },
+      {
+        path: "/addparcel",
+        element: (
+          <PrivetRoute>
+            <AddParcelForm></AddParcelForm>
+          </PrivetRoute>
+        ),
+        loader: () => fetch("../../data/warehouses.json"),
       },
     ],
   },

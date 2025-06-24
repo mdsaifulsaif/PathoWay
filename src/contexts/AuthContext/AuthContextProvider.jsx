@@ -24,21 +24,20 @@ function AuthContextProvider({ children }) {
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUSer) => {
-      if (currentUSer) {
-        setUser(currentUSer);
-      } else {
-        setUser(null);
-      }
+    const unSubscribe = onAuthStateChanged(auth, (currentUSer) => {
+      setUser(currentUSer);
+      setLoading(false);
     });
-    setLoading(false);
+
+    return () => {
+      unSubscribe();
+    };
   }, []);
 
   const userData = {
     user,
     setUser,
     loading,
-    setLoading,
     createUser,
     loginUser,
   };

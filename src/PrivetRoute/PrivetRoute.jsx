@@ -5,15 +5,17 @@ import LoddingPage from "../pages/LoddingPage";
 
 function PrivetRoute({ children }) {
   const { user, loading } = use(AuthContext);
+
   const location = useLocation();
 
   if (loading) {
-    <LoddingPage></LoddingPage>;
+    return <LoddingPage></LoddingPage>;
   }
 
   if (user && user.email) {
     return children;
   }
+
   return <Navigate state={location.pathname} to="/login"></Navigate>;
 }
 
