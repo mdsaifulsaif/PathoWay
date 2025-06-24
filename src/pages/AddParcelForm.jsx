@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 // import warehouses from "../../data/warehouses.json";
+import { AuthContext } from "./../contexts/AuthContext/AuthContext";
+import UseAxiosSecure from "../Hooks/UseAxiosSecure";
 
 const AddParcelForm = () => {
+  const { user } = use(AuthContext);
+  const axiosSecure = UseAxiosSecure();
   const warehouses = useLoaderData();
   const {
     register,
@@ -77,10 +81,24 @@ const AddParcelForm = () => {
         const parcelData = {
           ...data,
           cost: totalCost,
+          userEmail: user?.email || "Guest",
           creation_date: new Date().toISOString(),
         };
-        console.log("Saving Parcel:", parcelData);
-        reset();
+        axiosSecure
+          .post("/parcels", parcelData)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.error("Error saving parcel:", error);
+            Swal.fire(
+              "Error!",
+              "Failed to book parcel. Please try again.",
+              "error"
+            );
+          });
+        // console.log("Saving Parcel:", parcelData);
+        // reset();
         Swal.fire("Success!", "Parcel has been booked.", "success");
       }
     });
