@@ -12,6 +12,7 @@ import MyPercel from "../pages/Dashboard/MyPercel";
 import AllData from "../pages/Dashboard/AllData";
 import ViewParcel from "../pages/ViewParcel";
 import Payments from "../pages/Dashboard/Payments/Payments";
+import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "payment/:id",
         Component: Payments,
+      },
+      {
+        path: "paymenthistory",
+        Component: PaymentHistory,
       },
     ],
   },

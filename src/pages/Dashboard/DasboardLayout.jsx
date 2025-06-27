@@ -25,6 +25,12 @@ const DasboardLayout = () => {
         >
           Parcel
         </Link>
+        <Link
+          to="/dashboard/paymenthistory"
+          className="block hover:bg-gray-700 p-2 rounded"
+        >
+          Payment History
+        </Link>
       </div>
 
       {/* Mobile Menu Button */}

@@ -4,8 +4,10 @@ import React, { use, useState } from "react";
 import { useParams } from "react-router";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import LoddingPage from "../../LoddingPage";
+import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
 
 function PaymentForm({ id }) {
+  const { user } = use(AuthContext);
   const parcelId = id;
   const axiosSecure = UseAxiosSecure();
 
@@ -25,8 +27,8 @@ function PaymentForm({ id }) {
     return <LoddingPage></LoddingPage>;
   }
 
-  const ammount = parcelInfo?.cost;
-  const amountInCents = ammount * 100; // Convert to cents for Stripe
+  const amount = parcelInfo?.cost;
+  const amountInCents = amount * 100; // Convert to cents for Stripe
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -57,23 +59,42 @@ function PaymentForm({ id }) {
       amountInCents,
       parcelId,
     });
-    console.log("res from instent", res);
+    // console.log("res from instent", res);
 
     const clientSecret = res.data.clientSecret;
     const result = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: "Jenny Rosen",
+          name: user.displayName,
+          email: user.email,
         },
       },
     });
     if (result.error) {
-      console.log(result.error.message);
+      setError(result.error.message);
     } else {
       if (result.paymentIntent.status === "succeeded") {
-        console.log("Payment succeeded!");
-        console.log(result);
+        setError("");
+        // console.log("Payment succeeded!");
+        // console.log(result);
+        // ceate payment history
+        const paymentData = {
+          parcelId,
+          transactionId: result.paymentIntent.id,
+          amount,
+          userEmail: user.email,
+        };
+
+        // set data to backent
+        const paymentRes = await axiosSecure.post(
+          "/payment-success",
+          paymentData
+        );
+
+        if (paymentRes) {
+          console.log("paymentlllllllll successfully done");
+        }
       }
     }
   };
@@ -90,7 +111,7 @@ function PaymentForm({ id }) {
           disabled={!stripe}
           className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
         >
-          Pay ${ammount} for Parcel
+          Pay ${amount} for Parcel
         </button>
         {error && <p className="text-red-600 text-sm mt-3">{error}</p>}
       </form>
