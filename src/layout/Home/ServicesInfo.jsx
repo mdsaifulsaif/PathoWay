@@ -1,4 +1,5 @@
 import { FaMapMarkedAlt, FaShieldAlt, FaPhoneAlt } from "react-icons/fa";
+import img1 from "../../assets/live-tracking.png";
 
 const ServicesInfo = () => {
   const services = [
@@ -27,9 +28,12 @@ const ServicesInfo = () => {
       {services.map((service, index) => (
         <div
           key={index}
-          className="flex items-start gap-4 p-6 bg-white rounded-lg shadow-sm border"
+          className="flex items-start justify-center gap-4 p-6 bg-white rounded-lg shadow-sm border"
         >
-          <div className="shrink-0">{service.icon}</div>
+          {/* <div className="shrink-0">{service.icon}</div> */}
+          <div className="">
+            <img src={img1} alt="" />
+          </div>
           <div>
             <h3 className="text-lg font-semibold text-gray-800">
               {service.title}

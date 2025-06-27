@@ -82,6 +82,8 @@ const AddParcelForm = () => {
           ...data,
           cost: totalCost,
           userEmail: user?.email || "Guest",
+          paymentStatus: "unpaid",
+          status: "pending",
           creation_date: new Date().toISOString(),
         };
         axiosSecure

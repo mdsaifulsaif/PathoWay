@@ -18,6 +18,9 @@ function Navber() {
         <Link to="/addparcel">Add Percel</Link>
       </li>
       <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
+      <li>
         <a>{user?.email}</a>
       </li>
     </>
