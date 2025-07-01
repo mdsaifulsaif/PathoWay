@@ -28,7 +28,7 @@ const ServicesInfo = () => {
       {services.map((service, index) => (
         <div
           key={index}
-          className="flex items-start justify-center gap-4 p-6 bg-white rounded-lg shadow-sm border"
+          className="flex flex-col items-center nd:flex-row md:items-start justify-center gap-4 p-6 bg-white rounded-lg shadow-sm border"
         >
           {/* <div className="shrink-0">{service.icon}</div> */}
           <div className="">

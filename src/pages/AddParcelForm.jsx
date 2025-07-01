@@ -88,9 +88,7 @@ const AddParcelForm = () => {
         };
         axiosSecure
           .post("/parcels", parcelData)
-          .then((res) => {
-            console.log(res.data);
-          })
+          .then((res) => {})
           .catch((error) => {
             console.error("Error saving parcel:", error);
             Swal.fire(
@@ -99,7 +97,7 @@ const AddParcelForm = () => {
               "error"
             );
           });
-        // console.log("Saving Parcel:", parcelData);
+
         // reset();
         Swal.fire("Success!", "Parcel has been booked.", "success");
       }

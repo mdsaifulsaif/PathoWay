@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import SiteLogo from "../../Components/SiteLogo";
@@ -13,24 +13,36 @@ const DasboardLayout = () => {
         <div className="text-white">
           <SiteLogo></SiteLogo>
         </div>
-        <Link
+        <NavLink
           to="/dashboard/alldata"
           className="block hover:bg-gray-700 p-2 rounded"
         >
           All Data
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/dashboard/myparcels"
           className="block hover:bg-gray-700 p-2 rounded"
         >
           Parcel
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/dashboard/paymenthistory"
           className="block hover:bg-gray-700 p-2 rounded"
         >
           Payment History
-        </Link>
+        </NavLink>
+        <NavLink
+          to="/dashboard/riders"
+          className="block hover:bg-gray-700 p-2 rounded"
+        >
+          Riders
+        </NavLink>
+        <NavLink
+          to="/dashboard/activeriders"
+          className="block hover:bg-gray-700 p-2 rounded"
+        >
+          Active Riders
+        </NavLink>
       </div>
 
       {/* Mobile Menu Button */}

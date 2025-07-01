@@ -18,7 +18,7 @@ function MyPercel() {
     error,
   } = useQuery({
     queryKey: ["myParcels", user?.email],
-    enabled: !!user?.email, // ✅ Prevent query until user is loaded
+    enabled: !!user?.email, //  Prevent query until user is loaded
     queryFn: async () => {
       const res = await axiosSecure.get(`/myparcels?email=${user?.email}`);
       return res.data;

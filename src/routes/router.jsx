@@ -13,6 +13,10 @@ import AllData from "../pages/Dashboard/AllData";
 import ViewParcel from "../pages/ViewParcel";
 import Payments from "../pages/Dashboard/Payments/Payments";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
+import BeaRider from "../layout/Home/BeaRider";
+import Riders from "../pages/Dashboard/Riders";
+import ActiveRiders from "../pages/Dashboard/ActiveRiders";
+import Rider from "../pages/Dashboard/Rider";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +45,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivetRoute>
             <ViewParcel></ViewParcel>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/bearider",
+        element: (
+          <PrivetRoute>
+            <BeaRider></BeaRider>
           </PrivetRoute>
         ),
       },
@@ -83,6 +95,18 @@ export const router = createBrowserRouter([
       {
         path: "paymenthistory",
         Component: PaymentHistory,
+      },
+      {
+        path: "riders",
+        Component: Riders,
+      },
+      {
+        path: "activeriders",
+        Component: ActiveRiders,
+      },
+      {
+        path: "riderdetails/:id",
+        Component: Rider,
       },
     ],
   },
