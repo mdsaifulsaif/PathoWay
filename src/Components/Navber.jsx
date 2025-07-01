@@ -1,9 +1,12 @@
-import React, { use } from "react";
+import React, { use, useContext } from "react";
 import SiteLogo from "./SiteLogo";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 import { Link } from "react-router";
+import { ThemeContext } from "../contexts/ThemeProvider/ThemeProvider";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 function Navber() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { user, logoutUser } = use(AuthContext);
 
   const handleLogout = () => {
@@ -43,6 +46,13 @@ function Navber() {
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
       <div className="navbar-end">
+        <button onClick={toggleTheme} className="text-xl p-2">
+          {theme === "dark" ? (
+            <FaSun className="text-yellow-400" />
+          ) : (
+            <FaMoon className="text-gray-800" />
+          )}
+        </button>
         {user?.email ? (
           <button
             onClick={handleLogout}

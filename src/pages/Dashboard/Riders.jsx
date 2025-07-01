@@ -1,12 +1,14 @@
-import React from "react";
+import React, { use } from "react";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaCheck, FaTrash, FaEye } from "react-icons/fa";
 import LoddingPage from "./../LoddingPage";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 
 function Riders() {
+  const { user } = use(AuthContext);
   const navigate = useNavigate();
   const axiosSecure = UseAxiosSecure();
   const {
@@ -28,6 +30,7 @@ function Riders() {
     try {
       await axiosSecure.put(`/riders/${id}`, {
         status: "accepted",
+        email: user.email,
       });
 
       Swal.fire("Success", "Rider has been accepted", "success");

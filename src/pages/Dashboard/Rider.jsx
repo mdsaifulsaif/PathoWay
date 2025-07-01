@@ -41,10 +41,10 @@ const Rider = () => {
           <span className="font-semibold">Full Name:</span> {rider.fullName}
         </p>
         <p>
-          <span className="font-semibold">Email:</span> {rider.emailAddress}
+          <span className="font-semibold">Email:</span> {rider.email}
         </p>
         <p>
-          <span className="font-semibold">Phone:</span> {rider.phone}
+          <span className="font-semibold">Phone:</span> {rider.contact}
         </p>
         <p>
           <span className="font-semibold">NID:</span> {rider.nid}

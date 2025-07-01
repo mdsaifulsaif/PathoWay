@@ -2,12 +2,13 @@ import React, { use, useState } from "react";
 import { useForm } from "react-hook-form";
 import loginimg from "../../assets/authImage.png";
 import SiteLogo from "../../Components/SiteLogo";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 function Register() {
+  const navetage = useNavigate();
   const { createUser, updateUser, user, googleLogin } = use(AuthContext);
   const [imageURL, setImageURL] = useState("");
 
@@ -38,55 +39,95 @@ function Register() {
     // console.log("chandd", image);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    const email = data.email;
-    const password = data.password;
-    createUser(email, password)
-      .then(async (res) => {
-        //  update profile
-        const userProfileData = {
-          displayName: data.name,
-          photoURL: imageURL,
-        };
-        updateUser(userProfileData)
-          .then(() => {
-            // Profile updated!
-            // ...
-          })
-          .catch((error) => {
-            console.log("userupdate ", error);
-          });
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   const email = data.email;
+  //   const password = data.password;
 
-        //send user data to server
+  //   createUser(email, password)
+  //     .then(async (res) => {
+  //       console.log(res.user);
+  //       //  update profile
+  //       const userProfileData = {
+  //         displayName: data.name,
+  //         photoURL: imageURL,
+  //       };
 
-        const userInfo = {
-          email: user.email,
-          crate_at: new Date().toISOString(),
-          role: "user",
-          last_login: new Date().toISOString(),
-        };
-        const userRes = await axios.post(
-          "http://localhost:3000/users",
-          userInfo
-        );
+  //       updateUser(userProfileData)
+  //         .then(() => {})
+  //         .catch((error) => {
+  //           console.log("userupdate ", error);
+  //         });
 
-        if (res.user) {
-          Swal.fire({
-            title: "User Create Successfully!",
-            icon: "success",
-            draggable: true,
-          });
-        }
-      })
-      .catch((error) => {
+  //       //send user data to server
+
+  //       const userInfo = {
+  //         email: user.email,
+  //         crate_at: new Date().toISOString(),
+  //         role: "user",
+  //         last_login: new Date().toISOString(),
+  //       };
+  //       const userRes = await axios.post(
+  //         "http://localhost:3000/users",
+  //         userInfo
+  //       );
+
+  //       if (res.user) {
+  //         Swal.fire({
+  //           title: "User Create Successfully!",
+  //           icon: "success",
+  //           draggable: true,
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       Swal.fire({
+  //         title: "Somthis is missing!",
+  //         text: "Welcome back!",
+  //         icon: "error",
+  //         confirmButtonText: "Continue",
+  //       });
+  //     });
+  // };
+  const onSubmit = async (data) => {
+    try {
+      const email = data.email;
+      const password = data.password;
+
+      const res = await createUser(email, password);
+      const newUser = res.user;
+
+      // Update profile
+      const userProfileData = {
+        displayName: data.name,
+        photoURL: imageURL,
+      };
+      await updateUser(userProfileData);
+
+      // Send user data to server
+      const userInfo = {
+        email: newUser.email, // ✅ fixed
+        created_at: new Date().toISOString(),
+        role: "user",
+        last_login: new Date().toISOString(),
+      };
+
+      const userRes = await axios.post("http://localhost:3000/users", userInfo);
+
+      if (userRes.data.insertedId || userRes.data.acknowledged) {
         Swal.fire({
-          title: "Somthis is missing!",
-          text: "Welcome back!",
-          icon: "error",
-          confirmButtonText: "Continue",
+          title: "User Created Successfully!",
+          icon: "success",
         });
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      Swal.fire({
+        title: "Something went wrong!",
+        text: error.message || "Please try again.",
+        icon: "error",
       });
+    }
   };
 
   const handleGoogleLogin = () => {
