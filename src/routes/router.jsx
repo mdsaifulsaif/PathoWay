@@ -21,6 +21,7 @@ import AdminUserPanel from "../pages/Dashboard/AdminUserPanel";
 import Forbidden from "../Components/Forbidden";
 import PrivetAdminRoute from "../PrivetRoute/PrivetAdminRoute";
 import AssignRider from "../pages/Dashboard/AssignRider";
+import RiderPendingParcels from "../pages/Dashboard/RiderPendingParcels";
 
 export const router = createBrowserRouter([
   {
@@ -124,6 +125,10 @@ export const router = createBrowserRouter([
       {
         path: "assignriders",
         element: <AssignRider></AssignRider>,
+      },
+      {
+        path: "rider-pending-parcels",
+        element: <RiderPendingParcels></RiderPendingParcels>,
       },
     ],
   },

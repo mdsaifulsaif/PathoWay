@@ -52,7 +52,6 @@ function PaymentForm({ id }) {
       setError(error.message);
     } else {
       setError("");
-      console.log("Payment method created:", paymentMethod);
     }
 
     //create payment

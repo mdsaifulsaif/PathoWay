@@ -23,19 +23,7 @@ const ActiveRiders = () => {
   });
 
   const handleView = (id) => {
-    console.log(id);
     navigate(`/dashboard/riderdetails/${id}`);
-    // Swal.fire({
-    //   title: rider.fullName,
-    //   html: `
-    //     <p><strong>Email:</strong> ${rider.emailAddress}</p>
-    //     <p><strong>Phone:</strong> ${rider.phone}</p>
-    //     <p><strong>NID:</strong> ${rider.nid}</p>
-    //     <p><strong>Bike No:</strong> ${rider.bikeNumber}</p>
-    //     <p><strong>Address:</strong> ${rider.address}</p>
-    //   `,
-    //   icon: "info",
-    // });
   };
 
   const handleDelete = async (id) => {

@@ -43,6 +43,12 @@ const DasboardLayout = () => {
         >
           <FaMoneyCheckAlt /> <span>Payment History</span>
         </NavLink>
+        <NavLink
+          to="/dashboard/rider-pending-parcels"
+          className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+        >
+          <FaMoneyCheckAlt /> <span>Rider Pending Parcels</span>
+        </NavLink>
 
         <>
           {" "}

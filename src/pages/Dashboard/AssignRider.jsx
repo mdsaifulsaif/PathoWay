@@ -23,7 +23,7 @@ const AssignRider = () => {
     queryKey: ["paidPendingParcels"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        "/assign-parcels?paymentStatus=paid&status=pending"
+        "/assign-parcels?paymentStatus=paid&delivery_status=pending"
       );
       return res.data;
     },
