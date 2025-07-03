@@ -85,6 +85,7 @@ const AddParcelForm = () => {
           paymentStatus: "unpaid",
           status: "pending",
           creation_date: new Date().toISOString(),
+          delivery_status: "pending",
         };
         axiosSecure
           .post("/parcels", parcelData)

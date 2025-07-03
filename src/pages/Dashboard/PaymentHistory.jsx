@@ -2,11 +2,13 @@ import React, { useEffect, useState, useContext } from "react";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { useQuery } from "@tanstack/react-query";
+import LoddingPage from "../LoddingPage";
 // import useAxiosSecure from "../../hooks/useAxiosSecure"; // your axios base URL hook
 // import { AuthContext } from "../../authProvider/authProvider"; // adjust path if needed
 
 const PaymentHistory = () => {
   const [paymentHistory, setPaymentHistory] = useState([]);
+  const [loadding, setLoadding] = useState(true);
   const axiosSecure = UseAxiosSecure();
   const { user } = useContext(AuthContext);
 
@@ -14,10 +16,17 @@ const PaymentHistory = () => {
     if (user?.email) {
       axiosSecure
         .get(`/payments?email=${user.email}`) // optional if admin: `/payments`
-        .then((res) => setPaymentHistory(res.data))
+        .then((res) => {
+          setPaymentHistory(res.data);
+          setLoadding(false);
+        })
         .catch((err) => console.error("Error loading payment history:", err));
     }
   }, [user, axiosSecure]);
+
+  if (loadding) {
+    return <LoddingPage></LoddingPage>;
+  }
 
   return (
     <div className="p-6">

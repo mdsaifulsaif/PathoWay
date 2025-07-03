@@ -21,9 +21,10 @@ const BeaRider = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("riderdata", data);
+    const riderdata = { ...data, work_status: "free" };
+    // console.log("riderdata", riderdata);
     try {
-      const response = await axiosSecure.post("/riders", data);
+      const response = await axiosSecure.post("/riders", riderdata);
       if (response.data) {
         Swal.fire({
           icon: "success",

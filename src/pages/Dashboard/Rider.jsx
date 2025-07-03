@@ -53,7 +53,10 @@ const Rider = () => {
           <span className="font-semibold">Bike Number:</span> {rider.bikeNumber}
         </p>
         <p>
-          <span className="font-semibold">Address:</span> {rider.address}
+          <span className="font-semibold">Work:</span> {rider.work_status}
+        </p>
+        <p>
+          <span className="font-semibold">Warehouse:</span> {rider.warehouse}
         </p>
         <p>
           <span className="font-semibold">Registered At:</span>{" "}

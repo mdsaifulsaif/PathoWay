@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import LoddingPage from "../../LoddingPage";
 import { AuthContext } from "../../../contexts/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 function PaymentForm({ id }) {
   const { user } = use(AuthContext);
@@ -93,7 +94,12 @@ function PaymentForm({ id }) {
         );
 
         if (paymentRes) {
-          console.log("paymentlllllllll successfully done");
+          Swal.fire({
+            title: "Payment Successful!",
+            text: "Your payment has been processed successfully.",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
         }
       }
     }

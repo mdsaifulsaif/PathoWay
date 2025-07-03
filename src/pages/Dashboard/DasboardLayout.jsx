@@ -44,35 +44,33 @@ const DasboardLayout = () => {
           <FaMoneyCheckAlt /> <span>Payment History</span>
         </NavLink>
 
-        {role == "admin" && (
-          <>
-            {" "}
-            <NavLink
-              to="/dashboard/riders"
-              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
-            >
-              <FaMotorcycle /> <span>Riders</span>
-            </NavLink>
-            <NavLink
-              to="/dashboard/assignriders"
-              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
-            >
-              <FaMotorcycle /> <span>AssignRiders</span>
-            </NavLink>
-            <NavLink
-              to="/dashboard/activeriders"
-              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
-            >
-              <FaUserCheck /> <span>Active Riders</span>
-            </NavLink>
-            <NavLink
-              to="/dashboard/admin"
-              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
-            >
-              <FaUserShield /> <span>Admin</span>
-            </NavLink>
-          </>
-        )}
+        <>
+          {" "}
+          <NavLink
+            to="/dashboard/riders"
+            className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+          >
+            <FaMotorcycle /> <span>Riders</span>
+          </NavLink>
+          <NavLink
+            to="/dashboard/assignriders"
+            className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+          >
+            <FaMotorcycle /> <span>AssignRiders</span>
+          </NavLink>
+          <NavLink
+            to="/dashboard/activeriders"
+            className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+          >
+            <FaUserCheck /> <span>Active Riders</span>
+          </NavLink>
+          <NavLink
+            to="/dashboard/admin"
+            className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+          >
+            <FaUserShield /> <span>Admin</span>
+          </NavLink>
+        </>
       </div>
 
       {/* Mobile Menu Button */}

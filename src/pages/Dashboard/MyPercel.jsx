@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import UseAxiosSecure from "../../Hooks/UseAxiosSecure";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import LoddingPage from "../LoddingPage";
 
 function MyPercel() {
   const { user } = useContext(AuthContext); // ✅ Fixed here
@@ -25,7 +26,7 @@ function MyPercel() {
     },
   });
 
-  if (isLoading) return <p>লোড হচ্ছে...</p>;
+  if (isLoading) return <LoddingPage></LoddingPage>;
   if (isError) return <p className="text-red-500">⚠️ Error: {error.message}</p>;
 
   const handleDelete = (id) => {
