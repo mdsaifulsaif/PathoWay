@@ -17,6 +17,10 @@ import BeaRider from "../layout/Home/BeaRider";
 import Riders from "../pages/Dashboard/Riders";
 import ActiveRiders from "../pages/Dashboard/ActiveRiders";
 import Rider from "../pages/Dashboard/Rider";
+import AdminUserPanel from "../pages/Dashboard/AdminUserPanel";
+import Forbidden from "../Components/Forbidden";
+import PrivetAdminRoute from "../PrivetRoute/PrivetAdminRoute";
+import AssignRider from "../pages/Dashboard/AssignRider";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +63,10 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "forbidden",
+    Component: Forbidden,
+  },
+  {
     path: "/",
     Component: AuthLayout,
     children: [
@@ -81,13 +89,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        index: true,
+        Component: AllData,
+      },
+      {
         path: "myparcels",
         Component: MyPercel,
       },
-      {
-        path: "alldata",
-        Component: AllData,
-      },
+
       {
         path: "payment/:id",
         Component: Payments,
@@ -98,7 +107,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "riders",
-        Component: Riders,
+        element: <Riders></Riders>,
       },
       {
         path: "activeriders",
@@ -107,6 +116,14 @@ export const router = createBrowserRouter([
       {
         path: "riderdetails/:id",
         Component: Rider,
+      },
+      {
+        path: "admin",
+        element: <AdminUserPanel></AdminUserPanel>,
+      },
+      {
+        path: "assignriders",
+        element: <AssignRider></AssignRider>,
       },
     ],
   },

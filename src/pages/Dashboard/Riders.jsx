@@ -19,7 +19,7 @@ function Riders() {
   } = useQuery({
     queryKey: ["ridersData"],
     queryFn: async () => {
-      const res = await axiosSecure.get("http://localhost:3000/riders");
+      const res = await axiosSecure.get("/riders");
       return res.data;
     },
   });

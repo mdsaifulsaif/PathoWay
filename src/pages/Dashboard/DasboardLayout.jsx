@@ -2,47 +2,77 @@ import { Link, NavLink, Outlet } from "react-router";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import SiteLogo from "../../Components/SiteLogo";
+// import useUserRole from "../../Hooks/useUserRole";
+import {
+  FaThList,
+  FaBox,
+  FaMoneyCheckAlt,
+  FaMotorcycle,
+  FaUserCheck,
+  FaUserShield,
+} from "react-icons/fa";
+import LoddingPage from "../LoddingPage";
+import useUserRole from "../../Hooks/useUserRole";
 
 const DasboardLayout = () => {
   const [open, setOpen] = useState(false);
+  const [role, loading] = useUserRole();
 
+  if (loading) {
+    return <LoddingPage></LoddingPage>;
+  }
   return (
     <div className="flex h-screen">
       {/* Desktop Sidebar */}
-      <div className="hidden md:block bg-gray-600 text-white w-64 p-4 space-y-4">
-        <div className="text-white">
-          <SiteLogo></SiteLogo>
+
+      <div className="hidden md:block bg-gray-800 text-white w-64 p-4 space-y-4 min-h-screen">
+        <div className="mb-6">
+          <SiteLogo />
         </div>
-        <NavLink
-          to="/dashboard/alldata"
-          className="block hover:bg-gray-700 p-2 rounded"
-        >
-          All Data
-        </NavLink>
+
         <NavLink
           to="/dashboard/myparcels"
-          className="block hover:bg-gray-700 p-2 rounded"
+          className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
         >
-          Parcel
+          <FaBox /> <span>Parcel</span>
         </NavLink>
+
         <NavLink
           to="/dashboard/paymenthistory"
-          className="block hover:bg-gray-700 p-2 rounded"
+          className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
         >
-          Payment History
+          <FaMoneyCheckAlt /> <span>Payment History</span>
         </NavLink>
-        <NavLink
-          to="/dashboard/riders"
-          className="block hover:bg-gray-700 p-2 rounded"
-        >
-          Riders
-        </NavLink>
-        <NavLink
-          to="/dashboard/activeriders"
-          className="block hover:bg-gray-700 p-2 rounded"
-        >
-          Active Riders
-        </NavLink>
+
+        {role == "admin" && (
+          <>
+            {" "}
+            <NavLink
+              to="/dashboard/riders"
+              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+            >
+              <FaMotorcycle /> <span>Riders</span>
+            </NavLink>
+            <NavLink
+              to="/dashboard/assignriders"
+              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+            >
+              <FaMotorcycle /> <span>AssignRiders</span>
+            </NavLink>
+            <NavLink
+              to="/dashboard/activeriders"
+              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+            >
+              <FaUserCheck /> <span>Active Riders</span>
+            </NavLink>
+            <NavLink
+              to="/dashboard/admin"
+              className="flex items-center gap-2 hover:bg-gray-700 p-2 rounded"
+            >
+              <FaUserShield /> <span>Admin</span>
+            </NavLink>
+          </>
+        )}
       </div>
 
       {/* Mobile Menu Button */}
